@@ -16,12 +16,15 @@ code remotely on Flux. You'll need your account linked to our Flux
 allocation (contact Jonathan at stroud@umich.edu). Make sure to change
 this line at the top:
 
+```
 #PBS -M youruniqname@umich.edu
+```
 
 to match your actual uniqname. To run:
 
+```
 qsub ridge.pbs
-
+```
 
 ---- Data ----
 
