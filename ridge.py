@@ -27,20 +27,20 @@ rats_te = pd.read_csv('data/test.csv')
 
 # Let's take a look at the features
 
-print "Training set columns:"
-print rats_tr.columns.tolist()
+print("Training set columns:")
+print(rats_tr.columns.tolist())
 
-print "Training set size:", rats_tr.shape
+print("Training set size:", rats_tr.shape)
 
-print "Test set columns:"
-print rats_te.columns.tolist()
+print("Test set columns:")
+print(rats_te.columns.tolist())
 
-print "Test set size:", rats_te.shape
+print("Test set size:", rats_te.shape)
 
 # We're going predict 'quality' from the 'comments'.
 # Let's look at a few random comments and the quality rating
 inds = np.random.choice(range(rats_tr.shape[0]),size=10,replace=False)
-print rats_tr.loc[inds, ['comments', 'quality']]
+print(rats_tr.loc[inds, ['comments', 'quality']])
 
 # Construct bigram representation
 count_vect = CountVectorizer(min_df=120,stop_words=ENGLISH_STOP_WORDS,ngram_range=(1,2))
@@ -50,6 +50,7 @@ count_vect = CountVectorizer(min_df=120,stop_words=ENGLISH_STOP_WORDS,ngram_rang
 Xtrain = count_vect.fit_transform(rats_tr.comments.fillna(''))
 Xtest = count_vect.transform(rats_te.comments.fillna(''))
 
+print(Xtrain.shape)
 
 
 
@@ -68,18 +69,18 @@ df = pd.DataFrame(data={'words':count_vect.get_feature_names(),
                     })
 df.sort('coef',ascending=False,inplace=True)
 
-print "Ridge Coefficients"
+print("Ridge Coefficients")
 
-print "Most positive:"
-print df[0:30]
+print("Most positive:")
+print(df[0:30])
 
-print "Most negative"
-print df[-30:]
+print("Most negative")
+print(df[-30:])
 
 
 # How do we make a prediction?
 # What does the bigram representation look like?
-print rats_tr.loc[0, 'comments']
+print(rats_tr.loc[0, 'comments'])
 
 bg = pd.DataFrame(data={'x': np.ravel(Xtrain[0, :].todense()),
                         'words': count_vect.get_feature_names()
@@ -87,8 +88,8 @@ bg = pd.DataFrame(data={'x': np.ravel(Xtrain[0, :].todense()),
 bg.sort('x', ascending=False, inplace = True)
 bg = bg.merge(df, on='words')
 
-print "Bigram representation:"
-print bg[0:30]
+print("Bigram representation:")
+print(bg[0:30])
 
 
 # Save results in kaggle format
