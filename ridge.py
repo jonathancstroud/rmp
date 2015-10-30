@@ -50,7 +50,7 @@ count_vect = CountVectorizer(min_df=120,stop_words=ENGLISH_STOP_WORDS,ngram_rang
 Xtrain = count_vect.fit_transform(rats_tr.comments.fillna(''))
 Xtest = count_vect.transform(rats_te.comments.fillna(''))
 
-print(Xtrain.shape)
+
 
 
 
