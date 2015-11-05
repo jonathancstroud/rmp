@@ -25,7 +25,7 @@ np.random.seed(0)
 rats_tr = pd.read_csv('data/train.csv')
 rats_te = pd.read_csv('data/test.csv')
 
-# Let's take a look at the features
+# Let's take a look at the feature
 
 print("Training set columns:")
 print(rats_tr.columns.tolist())
@@ -70,12 +70,18 @@ df = pd.DataFrame(data={'words':count_vect.get_feature_names(),
 df.sort('coef',ascending=False,inplace=True)
 
 print("Ridge Coefficients")
-
 print("Most positive:")
 print(df[0:30])
-
 print("Most negative")
 print(df[-30:])
+
+
+# Save results in kaggle format
+submit = pd.DataFrame(data={'id': rats_te.id, 'quality': Yhat})
+submit.to_csv('ridge_submit.csv', index = False)
+
+
+
 
 
 # How do we make a prediction?
@@ -90,8 +96,3 @@ bg = bg.merge(df, on='words')
 
 print("Bigram representation:")
 print(bg[0:30])
-
-
-# Save results in kaggle format
-submit = pd.DataFrame(data={'id': rats_te.id, 'quality': Yhat})
-submit.to_csv('ridge_submit.csv', index = False)
