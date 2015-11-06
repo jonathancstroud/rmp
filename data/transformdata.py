@@ -101,8 +101,8 @@ def formatthedata(train):
     
 
 
-train=pd.read_csv("data/train.csv",header=0)
-test=pd.read_csv("data/test.csv",header=0)
+train=pd.read_csv("train.csv",header=0)
+test=pd.read_csv("test.csv",header=0)
 
 formatthedata(train)
 formatthedata(test)
